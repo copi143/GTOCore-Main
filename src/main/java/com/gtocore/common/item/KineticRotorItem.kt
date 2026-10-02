@@ -1,5 +1,7 @@
 package com.gtocore.common.item
 
+import com.gtocore.api.lang.Components
+
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -16,7 +18,9 @@ class KineticRotorItem(properties: Properties, durability: Int, min: Int, max: I
 
     override fun appendHoverText(itemstack: ItemStack, world: Level?, list: MutableList<Component>, flag: TooltipFlag) {
         super.appendHoverText(itemstack, world, list, flag)
-        list.add(Component.translatable("gtocore.tooltip.item.kinetic_rotor.min", MinWind))
-        list.add(Component.translatable("gtocore.tooltip.item.kinetic_rotor.max", MaxWind))
+        Components.appendTo(list) {
+            l10nLine("gtocore.tooltip.item.kinetic_rotor.min", MinWind)
+            l10nLine("gtocore.tooltip.item.kinetic_rotor.max", MaxWind)
+        }
     }
 }

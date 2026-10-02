@@ -43,6 +43,9 @@ class Components @PublishedApi internal constructor(
     inline fun str(str: String): MutableComponent = Component.literal(str)
 
     inline fun l10n(l10n: String): MutableComponent = Component.translatable(resolveTranslationKey(l10n))
+    /** 单参数翻译直接构建 Minecraft 参数数组，适配常见的容量、等级与名称提示。 */
+    inline fun l10n(l10n: String, arg: Any?): MutableComponent =
+        Component.translatable(resolveTranslationKey(l10n), arg)
     inline fun l10n(l10n: String, vararg args: Any?): MutableComponent = translate(l10n, args)
 
     inline fun line(line: Component): MutableComponentEditor = appendLine(line.copy())
@@ -50,6 +53,7 @@ class Components @PublishedApi internal constructor(
     /** 沿用 GTO 的延迟样式与动态颜色，每次构建时重新求值。 */
     inline fun line(line: ComponentSupplier): MutableComponentEditor = appendLine(line.get())
     inline fun l10nLine(l10nLine: String): MutableComponentEditor = appendLine(l10n(l10nLine))
+    inline fun l10nLine(l10nLine: String, arg: Any?): MutableComponentEditor = appendLine(l10n(l10nLine, arg))
     inline fun l10nLine(l10nLine: String, vararg args: Any?): MutableComponentEditor =
         appendLine(translate(l10nLine, args))
 
@@ -57,6 +61,7 @@ class Components @PublishedApi internal constructor(
     inline fun text(text: String): MutableComponentEditor = appendText(str(text))
     inline fun text(text: ComponentSupplier): MutableComponentEditor = appendText(text.get())
     inline fun l10nText(l10nText: String): MutableComponentEditor = appendText(l10n(l10nText))
+    inline fun l10nText(l10nText: String, arg: Any?): MutableComponentEditor = appendText(l10n(l10nText, arg))
     inline fun l10nText(l10nText: String, vararg args: Any?): MutableComponentEditor =
         appendText(translate(l10nText, args))
 

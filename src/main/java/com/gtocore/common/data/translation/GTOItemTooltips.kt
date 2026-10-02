@@ -408,32 +408,33 @@ object GTOItemTooltips : AutoInitialize<GTOItemTooltips>() {
                 l10nLine("gtceu.machine.me.export.tooltip")
                 l10nLine("gtceu.part_sharing.enabled")
                 lines(GTOMachineTooltips.AutoConnectMETooltips)
-                line(ComponentSlang.GTOSignal_Edition_ByGTONormal)
+                gtoEdition()
             }
         )
 
-        GTMultiMachines.POWER_SUBSTATION.setTooltipBuilder { _, components ->
-            ComponentListSupplier {
-                addTranslatable("gtocore.lang.power_substation.tooltip.0")
-                addTranslatable("gtocore.lang.power_substation.tooltip.1")
-                addTranslatable("gtocore.lang.power_substation.tooltip.2")
-            }.editionByGTONormal().apply(components)
-        }
+        GTMultiMachines.POWER_SUBSTATION.setTooltipBuilder(
+            Components.tooltip { _ ->
+                l10nLine("gtocore.lang.power_substation.tooltip.0")
+                l10nLine("gtocore.lang.power_substation.tooltip.1")
+                l10nLine("gtocore.lang.power_substation.tooltip.2")
+                gtoEdition()
+            }
+        )
 
-        GTMachines.STEAM_HATCH.setTooltipBuilder { _, components ->
-            ComponentListSupplier {
-                addTranslatable(
+        GTMachines.STEAM_HATCH.setTooltipBuilder(
+            Components.tooltip { _ ->
+                l10nLine(
                     "gtceu.universal.tooltip.fluid_storage_capacity",
                     FormattingUtil.formatNumbers(SteamHatchPartMachine.INITIAL_TANK_CAPACITY)
                 )
-                addTranslatable("gtceu.machine.steam.steam_hatch.tooltip")
-                addTranslatable(
+                l10nLine("gtceu.machine.steam.steam_hatch.tooltip")
+                l10nLine(
                     "gtocore.machine.conversion_rate",
                     Component.literal(FormattingUtil.formatNumbers(SteamParallelMultiblockMachine.CONVERSION_RATE))
                         .withStyle(ChatFormatting.RED)
                 )
-            }.apply(components)
-        }
+            }
+        )
     }
 
     private fun registerTissueTooltips() {

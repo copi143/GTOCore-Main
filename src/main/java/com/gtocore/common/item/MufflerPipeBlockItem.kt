@@ -1,8 +1,9 @@
 package com.gtocore.common.item
 
+import com.gtocore.api.lang.Components
+import com.gtocore.api.lang.gtoDescription
 import com.gtocore.common.block.MufflerPipeBlock
 
-import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -25,6 +26,8 @@ open class MufflerPipeBlockItem(block: MufflerPipeBlock, properties: Properties)
 
     override fun appendHoverText(stack: ItemStack, level: Level?, tooltip: MutableList<Component>, isAdvanced: TooltipFlag) {
         super.appendHoverText(stack, level, tooltip, isAdvanced)
-        tooltip.add(Component.translatable("gtocore.tooltip.item.muffler_pipe.desc").withStyle(ChatFormatting.GRAY))
+        Components.appendTo(tooltip) {
+            gtoDescription(l10n("gtocore.tooltip.item.muffler_pipe.desc"))
+        }
     }
 }

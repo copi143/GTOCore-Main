@@ -2,6 +2,7 @@ package com.gtocore.common.item
 
 import com.gregtechceu.gtceu.core.mixins.StrictNBTIngredientAccessor
 import com.gto.fastcollection.fastutil.O2IOpenCacheHashMap
+import com.gtocore.api.lang.Components
 import com.gtocore.api.placeholder.IPlaceholder
 import com.gtolib.api.item.IItem
 import com.gtolib.api.recipe.lookup.IngredientConverter
@@ -106,14 +107,16 @@ class DiscItem(properties: Properties) : Item(properties), IPlaceholder<Any, Ite
         super.appendHoverText(itemstack, world, list, flag)
         val storedItem = getStoredItem(itemstack)
         if (storedItem != null) {
-            list.add(
-                Component.translatable(
+            Components.appendTo(list) {
+                l10nLine(
                     "item.gtocore.disc.data", (storedItem as IItem).`gtolib$getReadOnlyStack`().displayName
                 )
-            )
+            }
         } else {
             getStoredFluid(itemstack)?.let {
-                list.add(Component.translatable("item.gtocore.disc.data", "[${FluidStack(it, 1).displayName.string}]"))
+                Components.appendTo(list) {
+                    l10nLine("item.gtocore.disc.data", "[${FluidStack(it, 1).displayName.string}]")
+                }
             }
         }
     }
