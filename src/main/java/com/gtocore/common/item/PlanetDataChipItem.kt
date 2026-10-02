@@ -1,5 +1,7 @@
 package com.gtocore.common.item
 
+import com.gtocore.api.lang.Components
+
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
@@ -20,7 +22,9 @@ class PlanetDataChipItem(properties: Properties) : Item(properties) {
         super.appendHoverText(itemstack, world, list, flag)
         val tag = itemstack.getTag() ?: return
         if (!tag.hasUUID("uuid")) return
-        list.add(Component.literal("UUID: ").append(tag.getUUID("uuid").toString()))
-        list.add(Component.translatable("gtceu.jei.ore_vein_diagram.dimensions").append(tag.getString("planet")))
+        Components.appendTo(list) {
+            line(str("UUID: ").append(tag.getUUID("uuid").toString()))
+            line(l10n("gtceu.jei.ore_vein_diagram.dimensions").append(tag.getString("planet")))
+        }
     }
 }

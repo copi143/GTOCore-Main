@@ -402,14 +402,15 @@ object GTOItemTooltips : AutoInitialize<GTOItemTooltips>() {
     }
 
     private fun registerMachineTooltips() {
-        CustomMachines.ME_EXPORT_BUFFER.setTooltipBuilder { _, components ->
-            ComponentListSupplier {
-                addTranslatable("gtceu.machine.dual_hatch.export.tooltip")
-                addTranslatable("gtceu.machine.me.export.tooltip")
-                addTranslatable("gtceu.part_sharing.enabled")
-                add(GTOMachineTooltips.AutoConnectMETooltips)
-            }.editionByGTONormal().apply(components)
-        }
+        CustomMachines.ME_EXPORT_BUFFER.setTooltipBuilder(
+            Components.tooltip { _ ->
+                l10nLine("gtceu.machine.dual_hatch.export.tooltip")
+                l10nLine("gtceu.machine.me.export.tooltip")
+                l10nLine("gtceu.part_sharing.enabled")
+                lines(GTOMachineTooltips.AutoConnectMETooltips)
+                line(ComponentSlang.GTOSignal_Edition_ByGTONormal)
+            }
+        )
 
         GTMultiMachines.POWER_SUBSTATION.setTooltipBuilder { _, components ->
             ComponentListSupplier {
